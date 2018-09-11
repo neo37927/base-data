@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="HorInfoValidation">
+	<sql id="baseColumnList">
+			u.id as id ,
+			u.disabled as disabled ,
+			u.is_delete as isDelete ,
+			u.uuid as uuid ,
+			u.create_user as createUser ,
+			u.create_time as createTime ,
+			u.update_user as updateUser ,
+			u.update_time as updateTime ,
+			u.remark as remark ,
+			u.delete_flag as deleteFlag ,
+			u.delete_remark as deleteRemark ,
+			u.bo_id as boId ,
+			u.bp_id as bpId ,
+			u.user_id as userId ,
+			u.user_name as userName ,
+			u.real_name as realName ,
+			u.source as source ,
+			u.p_id as pId ,
+			u.p_name as pName ,
+			u.province_code as provinceCode ,
+			u.province_name as provinceName ,
+			u.type as type ,
+			u.usertype as usertype ,
+			u.creator_id as creatorId ,
+			u.creator_user_name as creatorUserName ,
+			u.creator_real_name as creatorRealName ,
+			u.updator_id as updatorId ,
+			u.updator_user_name as updatorUserName ,
+			u.updator_real_name as updatorRealName ,
+			u.id_num as idNum ,
+			u.mobile_num as mobileNum ,
+			u.home_address as homeAddress ,
+			u.current_address as currentAddress ,
+			u.school_company_name as schoolCompanyName ,
+			u.school_company_address as schoolCompanyAddress ,
+			u.school_company_phone as schoolCompanyPhone ,
+			u.qq_num as qqNum ,
+			u.email as email ,
+			u.parent_phone as parentPhone ,
+			u.counsellor_phone as counsellorPhone ,
+			u.contact1_phone as contact1Phone ,
+			u.contact2_phone as contact2Phone ,
+			u.contact3_phone as contact3Phone ,
+			u.tel as tel ,
+			u.bo_finish_time as boFinishTime ,
+			u.bo_overdue_day_count as boOverdueDayCount ,
+			u.lib_name as libName ,
+			u.submit_time as submitTime ,
+			u.approach_type as approachType ,
+			u.approach_name as approachName ,
+			u.version as version 
+	</sql>
+	<sql id="searchCriteria">
+		<if test="id != null">
+			and u.id = #{id,jdbcType=NUMERIC}
+		</if>
+		<if test="disabled != null">
+			and u.disabled = #{disabled,jdbcType=NUMERIC}
+		</if>
+		<if test="isDelete != null">
+			and u.is_delete = #{isDelete,jdbcType=NUMERIC}
+		</if>
+		<if test="uuid != null">
+			and u.uuid = #{uuid,jdbcType=VARCHAR}
+		</if>
+		<if test="uuidLike != null">
+			and u.uuid like CONCAT('%',#{uuidLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="createUser != null">
+			and u.create_user = #{createUser,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime != null">
+			and u.create_time = #{createTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="updateUser != null">
+			and u.update_user = #{updateUser,jdbcType=NUMERIC}
+		</if>
+		<if test="updateTime != null">
+			and u.update_time = #{updateTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="remark != null">
+			and u.remark = #{remark,jdbcType=VARCHAR}
+		</if>
+		<if test="remarkLike != null">
+			and u.remark like CONCAT('%',#{remarkLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="deleteFlag != null">
+			and u.delete_flag = #{deleteFlag,jdbcType=NUMERIC}
+		</if>
+		<if test="deleteRemark != null">
+			and u.delete_remark = #{deleteRemark,jdbcType=VARCHAR}
+		</if>
+		<if test="deleteRemarkLike != null">
+			and u.delete_remark like CONCAT('%',#{deleteRemarkLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="boId != null">
+			and u.bo_id = #{boId,jdbcType=VARCHAR}
+		</if>
+		<if test="boIdLike != null">
+			and u.bo_id like CONCAT('%',#{boIdLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="bpId != null">
+			and u.bp_id = #{bpId,jdbcType=VARCHAR}
+		</if>
+		<if test="bpIdLike != null">
+			and u.bp_id like CONCAT('%',#{bpIdLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="userId != null">
+			and u.user_id = #{userId,jdbcType=NUMERIC}
+		</if>
+		<if test="userName != null">
+			and u.user_name = #{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="userNameLike != null">
+			and u.user_name like CONCAT('%',#{userNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="realName != null">
+			and u.real_name = #{realName,jdbcType=VARCHAR}
+		</if>
+		<if test="realNameLike != null">
+			and u.real_name like CONCAT('%',#{realNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="source != null">
+			and u.source = #{source,jdbcType=NUMERIC}
+		</if>
+		<if test="pId != null">
+			and u.p_id = #{pId,jdbcType=NUMERIC}
+		</if>
+		<if test="pName != null">
+			and u.p_name = #{pName,jdbcType=VARCHAR}
+		</if>
+		<if test="pNameLike != null">
+			and u.p_name like CONCAT('%',#{pNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="provinceCode != null">
+			and u.province_code = #{provinceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceCodeLike != null">
+			and u.province_code like CONCAT('%',#{provinceCodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="provinceName != null">
+			and u.province_name = #{provinceName,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceNameLike != null">
+			and u.province_name like CONCAT('%',#{provinceNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="type != null">
+			and u.type = #{type,jdbcType=VARCHAR}
+		</if>
+		<if test="typeLike != null">
+			and u.type like CONCAT('%',#{typeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="usertype != null">
+			and u.usertype = #{usertype,jdbcType=NUMERIC}
+		</if>
+		<if test="creatorId != null">
+			and u.creator_id = #{creatorId,jdbcType=NUMERIC}
+		</if>
+		<if test="creatorUserName != null">
+			and u.creator_user_name = #{creatorUserName,jdbcType=VARCHAR}
+		</if>
+		<if test="creatorUserNameLike != null">
+			and u.creator_user_name like CONCAT('%',#{creatorUserNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="creatorRealName != null">
+			and u.creator_real_name = #{creatorRealName,jdbcType=VARCHAR}
+		</if>
+		<if test="creatorRealNameLike != null">
+			and u.creator_real_name like CONCAT('%',#{creatorRealNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="updatorId != null">
+			and u.updator_id = #{updatorId,jdbcType=NUMERIC}
+		</if>
+		<if test="updatorUserName != null">
+			and u.updator_user_name = #{updatorUserName,jdbcType=VARCHAR}
+		</if>
+		<if test="updatorUserNameLike != null">
+			and u.updator_user_name like CONCAT('%',#{updatorUserNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="updatorRealName != null">
+			and u.updator_real_name = #{updatorRealName,jdbcType=VARCHAR}
+		</if>
+		<if test="updatorRealNameLike != null">
+			and u.updator_real_name like CONCAT('%',#{updatorRealNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="idNum != null">
+			and u.id_num = #{idNum,jdbcType=VARCHAR}
+		</if>
+		<if test="idNumLike != null">
+			and u.id_num like CONCAT('%',#{idNumLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="mobileNum != null">
+			and u.mobile_num = #{mobileNum,jdbcType=VARCHAR}
+		</if>
+		<if test="mobileNumLike != null">
+			and u.mobile_num like CONCAT('%',#{mobileNumLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="homeAddress != null">
+			and u.home_address = #{homeAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="homeAddressLike != null">
+			and u.home_address like CONCAT('%',#{homeAddressLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="currentAddress != null">
+			and u.current_address = #{currentAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="currentAddressLike != null">
+			and u.current_address like CONCAT('%',#{currentAddressLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="schoolCompanyName != null">
+			and u.school_company_name = #{schoolCompanyName,jdbcType=VARCHAR}
+		</if>
+		<if test="schoolCompanyNameLike != null">
+			and u.school_company_name like CONCAT('%',#{schoolCompanyNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="schoolCompanyAddress != null">
+			and u.school_company_address = #{schoolCompanyAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="schoolCompanyAddressLike != null">
+			and u.school_company_address like CONCAT('%',#{schoolCompanyAddressLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="schoolCompanyPhone != null">
+			and u.school_company_phone = #{schoolCompanyPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="schoolCompanyPhoneLike != null">
+			and u.school_company_phone like CONCAT('%',#{schoolCompanyPhoneLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="qqNum != null">
+			and u.qq_num = #{qqNum,jdbcType=VARCHAR}
+		</if>
+		<if test="qqNumLike != null">
+			and u.qq_num like CONCAT('%',#{qqNumLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="email != null">
+			and u.email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="emailLike != null">
+			and u.email like CONCAT('%',#{emailLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="parentPhone != null">
+			and u.parent_phone = #{parentPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="parentPhoneLike != null">
+			and u.parent_phone like CONCAT('%',#{parentPhoneLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="counsellorPhone != null">
+			and u.counsellor_phone = #{counsellorPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="counsellorPhoneLike != null">
+			and u.counsellor_phone like CONCAT('%',#{counsellorPhoneLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="contact1Phone != null">
+			and u.contact1_phone = #{contact1Phone,jdbcType=VARCHAR}
+		</if>
+		<if test="contact1PhoneLike != null">
+			and u.contact1_phone like CONCAT('%',#{contact1PhoneLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="contact2Phone != null">
+			and u.contact2_phone = #{contact2Phone,jdbcType=VARCHAR}
+		</if>
+		<if test="contact2PhoneLike != null">
+			and u.contact2_phone like CONCAT('%',#{contact2PhoneLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="contact3Phone != null">
+			and u.contact3_phone = #{contact3Phone,jdbcType=VARCHAR}
+		</if>
+		<if test="contact3PhoneLike != null">
+			and u.contact3_phone like CONCAT('%',#{contact3PhoneLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="tel != null">
+			and u.tel = #{tel,jdbcType=VARCHAR}
+		</if>
+		<if test="telLike != null">
+			and u.tel like CONCAT('%',#{telLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="boFinishTime != null">
+			and u.bo_finish_time = #{boFinishTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="boOverdueDayCount != null">
+			and u.bo_overdue_day_count = #{boOverdueDayCount,jdbcType=NUMERIC}
+		</if>
+		<if test="libName != null">
+			and u.lib_name = #{libName,jdbcType=VARCHAR}
+		</if>
+		<if test="libNameLike != null">
+			and u.lib_name like CONCAT('%',#{libNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="submitTime != null">
+			and u.submit_time = #{submitTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="approachType != null">
+			and u.approach_type = #{approachType,jdbcType=VARCHAR}
+		</if>
+		<if test="approachTypeLike != null">
+			and u.approach_type like CONCAT('%',#{approachTypeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="approachName != null">
+			and u.approach_name = #{approachName,jdbcType=VARCHAR}
+		</if>
+		<if test="approachNameLike != null">
+			and u.approach_name like CONCAT('%',#{approachNameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="version != null">
+			and u.version = #{version,jdbcType=NUMERIC}
+		</if>
+	</sql>
+
+	<!-- 查询列表数据 -->
+	<select id="queryListResult" parameterType="map" resultType="HorInfoValidation">
+		select
+			<include refid="baseColumnList" />
+		from
+			HOR_INFO_VALIDATION u
+		where
+		    u.disabled = 0
+			<include refid="searchCriteria" />
+			<include refid="Util.orderCriteria" />
+			<include refid="Util.mysqlPage" />
+	</select>
+	<select id="queryListResultCount" parameterType="map" resultType="long">
+		select
+			count(u.id)
+		from
+			HOR_INFO_VALIDATION u
+		where
+		    u.disabled = 0
+		<include refid="searchCriteria" />
+	</select>
+	<!-- 自定义查询列表where条件 -->
+	<select id="queryListResultByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="HorInfoValidation">
+		select
+			<include refid="baseColumnList" />
+		from
+			HOR_INFO_VALIDATION u
+		where
+		    u.disabled = 0 
+		    <if test="whereSqlStr != null">
+			AND ${whereSqlStr}
+			</if>
+	</select>
+	<select id="queryListResultCountByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="long">
+		select
+			count(u.id)
+		from
+			HOR_INFO_VALIDATION u
+		where
+		    u.disabled = 0 
+			<if test="whereSqlStr != null">
+			AND ${whereSqlStr}
+			</if>
+	</select>
+	
+	<!-- 查询一条数据 -->
+	<select id="querySingleResultById" parameterType="long" resultType="HorInfoValidation">
+		select
+			<include refid="baseColumnList" />
+		from
+			HOR_INFO_VALIDATION u
+		where
+		    u.disabled = 0
+			and u.ID = #{id,jdbcType=NUMERIC}
+	</select>
+	
+	<select id="querySingleResultByUUID" parameterType="String" resultType="HorInfoValidation">
+		select
+			<include refid="baseColumnList" />
+		from
+			HOR_INFO_VALIDATION u
+		where
+			    u.disabled = 0
+			and u.uuid = #{uuid,jdbcType=VARCHAR}
+	</select>
+	<select id="querySingleResultByParams" parameterType="map" resultType="HorInfoValidation">
+		select
+			<include refid="baseColumnList" />
+		from
+			HOR_INFO_VALIDATION u
+		where
+			u.disabled = 0
+			<include refid="searchCriteria" />
+	</select>
+
+	<insert id="save" parameterType="HorInfoValidation" useGeneratedKeys="true" keyProperty="id">
+		insert into HOR_INFO_VALIDATION(
+			disabled,
+			is_delete,
+			uuid,
+			create_user,
+			create_time,
+			update_user,
+			update_time,
+			remark,
+			delete_flag,
+			delete_remark,
+			bo_id,
+			bp_id,
+			user_id,
+			user_name,
+			real_name,
+			source,
+			p_id,
+			p_name,
+			province_code,
+			province_name,
+			type,
+			usertype,
+			creator_id,
+			creator_user_name,
+			creator_real_name,
+			updator_id,
+			updator_user_name,
+			updator_real_name,
+			id_num,
+			mobile_num,
+			home_address,
+			current_address,
+			school_company_name,
+			school_company_address,
+			school_company_phone,
+			qq_num,
+			email,
+			parent_phone,
+			counsellor_phone,
+			contact1_phone,
+			contact2_phone,
+			contact3_phone,
+			tel,
+			bo_finish_time,
+			bo_overdue_day_count,
+			lib_name,
+			submit_time,
+			approach_type,
+			approach_name,
+			version
+		)values(
+			#{disabled,jdbcType=NUMERIC},
+			#{isDelete,jdbcType=NUMERIC},
+			#{uuid,jdbcType=VARCHAR},
+			#{createUser,jdbcType=NUMERIC},
+			#{createTime,jdbcType=TIMESTAMP},
+			#{updateUser,jdbcType=NUMERIC},
+			#{updateTime,jdbcType=TIMESTAMP},
+			#{remark,jdbcType=VARCHAR},
+			#{deleteFlag,jdbcType=NUMERIC},
+			#{deleteRemark,jdbcType=VARCHAR},
+			#{boId,jdbcType=VARCHAR},
+			#{bpId,jdbcType=VARCHAR},
+			#{userId,jdbcType=NUMERIC},
+			#{userName,jdbcType=VARCHAR},
+			#{realName,jdbcType=VARCHAR},
+			#{source,jdbcType=NUMERIC},
+			#{pId,jdbcType=NUMERIC},
+			#{pName,jdbcType=VARCHAR},
+			#{provinceCode,jdbcType=VARCHAR},
+			#{provinceName,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{usertype,jdbcType=NUMERIC},
+			#{creatorId,jdbcType=NUMERIC},
+			#{creatorUserName,jdbcType=VARCHAR},
+			#{creatorRealName,jdbcType=VARCHAR},
+			#{updatorId,jdbcType=NUMERIC},
+			#{updatorUserName,jdbcType=VARCHAR},
+			#{updatorRealName,jdbcType=VARCHAR},
+			#{idNum,jdbcType=VARCHAR},
+			#{mobileNum,jdbcType=VARCHAR},
+			#{homeAddress,jdbcType=VARCHAR},
+			#{currentAddress,jdbcType=VARCHAR},
+			#{schoolCompanyName,jdbcType=VARCHAR},
+			#{schoolCompanyAddress,jdbcType=VARCHAR},
+			#{schoolCompanyPhone,jdbcType=VARCHAR},
+			#{qqNum,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{parentPhone,jdbcType=VARCHAR},
+			#{counsellorPhone,jdbcType=VARCHAR},
+			#{contact1Phone,jdbcType=VARCHAR},
+			#{contact2Phone,jdbcType=VARCHAR},
+			#{contact3Phone,jdbcType=VARCHAR},
+			#{tel,jdbcType=VARCHAR},
+			#{boFinishTime,jdbcType=TIMESTAMP},
+			#{boOverdueDayCount,jdbcType=NUMERIC},
+			#{libName,jdbcType=VARCHAR},
+			#{submitTime,jdbcType=TIMESTAMP},
+			#{approachType,jdbcType=VARCHAR},
+			#{approachName,jdbcType=VARCHAR},
+			#{version,jdbcType=NUMERIC}
+		)
+	</insert>
+	<insert id="saveBatch" parameterType="ArrayList">
+		insert into HOR_INFO_VALIDATION(
+			disabled,
+			is_delete,
+			uuid,
+			create_user,
+			create_time,
+			update_user,
+			update_time,
+			remark,
+			delete_flag,
+			delete_remark,
+			bo_id,
+			bp_id,
+			user_id,
+			user_name,
+			real_name,
+			source,
+			p_id,
+			p_name,
+			province_code,
+			province_name,
+			type,
+			usertype,
+			creator_id,
+			creator_user_name,
+			creator_real_name,
+			updator_id,
+			updator_user_name,
+			updator_real_name,
+			id_num,
+			mobile_num,
+			home_address,
+			current_address,
+			school_company_name,
+			school_company_address,
+			school_company_phone,
+			qq_num,
+			email,
+			parent_phone,
+			counsellor_phone,
+			contact1_phone,
+			contact2_phone,
+			contact3_phone,
+			tel,
+			bo_finish_time,
+			bo_overdue_day_count,
+			lib_name,
+			submit_time,
+			approach_type,
+			approach_name,
+			version
+		)values
+		<foreach collection="list" item="obj" separator=",">
+		(
+			#{obj.disabled,jdbcType=NUMERIC},
+			#{obj.isDelete,jdbcType=NUMERIC},
+			#{obj.uuid,jdbcType=VARCHAR},
+			#{obj.createUser,jdbcType=NUMERIC},
+			#{obj.createTime,jdbcType=TIMESTAMP},
+			#{obj.updateUser,jdbcType=NUMERIC},
+			#{obj.updateTime,jdbcType=TIMESTAMP},
+			#{obj.remark,jdbcType=VARCHAR},
+			#{obj.deleteFlag,jdbcType=NUMERIC},
+			#{obj.deleteRemark,jdbcType=VARCHAR},
+			#{obj.boId,jdbcType=VARCHAR},
+			#{obj.bpId,jdbcType=VARCHAR},
+			#{obj.userId,jdbcType=NUMERIC},
+			#{obj.userName,jdbcType=VARCHAR},
+			#{obj.realName,jdbcType=VARCHAR},
+			#{obj.source,jdbcType=NUMERIC},
+			#{obj.pId,jdbcType=NUMERIC},
+			#{obj.pName,jdbcType=VARCHAR},
+			#{obj.provinceCode,jdbcType=VARCHAR},
+			#{obj.provinceName,jdbcType=VARCHAR},
+			#{obj.type,jdbcType=VARCHAR},
+			#{obj.usertype,jdbcType=NUMERIC},
+			#{obj.creatorId,jdbcType=NUMERIC},
+			#{obj.creatorUserName,jdbcType=VARCHAR},
+			#{obj.creatorRealName,jdbcType=VARCHAR},
+			#{obj.updatorId,jdbcType=NUMERIC},
+			#{obj.updatorUserName,jdbcType=VARCHAR},
+			#{obj.updatorRealName,jdbcType=VARCHAR},
+			#{obj.idNum,jdbcType=VARCHAR},
+			#{obj.mobileNum,jdbcType=VARCHAR},
+			#{obj.homeAddress,jdbcType=VARCHAR},
+			#{obj.currentAddress,jdbcType=VARCHAR},
+			#{obj.schoolCompanyName,jdbcType=VARCHAR},
+			#{obj.schoolCompanyAddress,jdbcType=VARCHAR},
+			#{obj.schoolCompanyPhone,jdbcType=VARCHAR},
+			#{obj.qqNum,jdbcType=VARCHAR},
+			#{obj.email,jdbcType=VARCHAR},
+			#{obj.parentPhone,jdbcType=VARCHAR},
+			#{obj.counsellorPhone,jdbcType=VARCHAR},
+			#{obj.contact1Phone,jdbcType=VARCHAR},
+			#{obj.contact2Phone,jdbcType=VARCHAR},
+			#{obj.contact3Phone,jdbcType=VARCHAR},
+			#{obj.tel,jdbcType=VARCHAR},
+			#{obj.boFinishTime,jdbcType=TIMESTAMP},
+			#{obj.boOverdueDayCount,jdbcType=NUMERIC},
+			#{obj.libName,jdbcType=VARCHAR},
+			#{obj.submitTime,jdbcType=TIMESTAMP},
+			#{obj.approachType,jdbcType=VARCHAR},
+			#{obj.approachName,jdbcType=VARCHAR},
+			#{obj.version,jdbcType=NUMERIC}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="HorInfoValidation">
+		update HOR_INFO_VALIDATION u
+		<set>
+			u.create_time = #{createTime,jdbcType=TIMESTAMP} 
+ 			<if test="disabled != null">
+				,u.disabled=#{disabled,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="isDelete != null">
+				,u.is_delete=#{isDelete,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="updateUser != null">
+				,u.update_user=#{updateUser,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="updateTime != null">
+				,u.update_time=#{updateTime,jdbcType=TIMESTAMP} 
+			</if>
+ 			<if test="remark != null">
+				,u.remark=#{remark,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="deleteFlag != null">
+				,u.delete_flag=#{deleteFlag,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="deleteRemark != null">
+				,u.delete_remark=#{deleteRemark,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="boId != null">
+				,u.bo_id=#{boId,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="bpId != null">
+				,u.bp_id=#{bpId,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="userId != null">
+				,u.user_id=#{userId,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="userName != null">
+				,u.user_name=#{userName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="realName != null">
+				,u.real_name=#{realName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="source != null">
+				,u.source=#{source,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="pId != null">
+				,u.p_id=#{pId,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="pName != null">
+				,u.p_name=#{pName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="provinceCode != null">
+				,u.province_code=#{provinceCode,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="provinceName != null">
+				,u.province_name=#{provinceName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="type != null">
+				,u.type=#{type,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="usertype != null">
+				,u.usertype=#{usertype,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="creatorId != null">
+				,u.creator_id=#{creatorId,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="creatorUserName != null">
+				,u.creator_user_name=#{creatorUserName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="creatorRealName != null">
+				,u.creator_real_name=#{creatorRealName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="updatorId != null">
+				,u.updator_id=#{updatorId,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="updatorUserName != null">
+				,u.updator_user_name=#{updatorUserName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="updatorRealName != null">
+				,u.updator_real_name=#{updatorRealName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="idNum != null">
+				,u.id_num=#{idNum,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="mobileNum != null">
+				,u.mobile_num=#{mobileNum,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="homeAddress != null">
+				,u.home_address=#{homeAddress,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="currentAddress != null">
+				,u.current_address=#{currentAddress,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="schoolCompanyName != null">
+				,u.school_company_name=#{schoolCompanyName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="schoolCompanyAddress != null">
+				,u.school_company_address=#{schoolCompanyAddress,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="schoolCompanyPhone != null">
+				,u.school_company_phone=#{schoolCompanyPhone,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="qqNum != null">
+				,u.qq_num=#{qqNum,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="email != null">
+				,u.email=#{email,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="parentPhone != null">
+				,u.parent_phone=#{parentPhone,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="counsellorPhone != null">
+				,u.counsellor_phone=#{counsellorPhone,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="contact1Phone != null">
+				,u.contact1_phone=#{contact1Phone,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="contact2Phone != null">
+				,u.contact2_phone=#{contact2Phone,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="contact3Phone != null">
+				,u.contact3_phone=#{contact3Phone,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="tel != null">
+				,u.tel=#{tel,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="boFinishTime != null">
+				,u.bo_finish_time=#{boFinishTime,jdbcType=TIMESTAMP} 
+			</if>
+ 			<if test="boOverdueDayCount != null">
+				,u.bo_overdue_day_count=#{boOverdueDayCount,jdbcType=NUMERIC} 
+			</if>
+ 			<if test="libName != null">
+				,u.lib_name=#{libName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="submitTime != null">
+				,u.submit_time=#{submitTime,jdbcType=TIMESTAMP} 
+			</if>
+ 			<if test="approachType != null">
+				,u.approach_type=#{approachType,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="approachName != null">
+				,u.approach_name=#{approachName,jdbcType=VARCHAR} 
+			</if>
+ 			<if test="version != null">
+				,u.version=#{version,jdbcType=NUMERIC} 
+			</if>
+		</set>
+		where
+            u.ID = #{id,jdbcType=NUMERIC}
+            
+	</update>
+	<!-- 自定义修改列以及修改条件 -->
+	<update id="updateCustomColumnByWhere" parameterType="map" statementType="STATEMENT">
+		UPDATE  HOR_INFO_VALIDATION  ${updateSqlStr}
+		where
+			${whereSqlStr}
+	</update>
+	
+	<!-- 逻辑删除 -->
+	<update id="logicDelete" parameterType="map">
+		update HOR_INFO_VALIDATION u set
+		u.DISABLED = 1
+		<if test="updateTime != null">
+		    ,u.UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="updateUser != null">
+            ,u.UPDATE_USER = #{updateUser,jdbcType=NUMERIC}
+		</if>
+		where
+			<if test="id != null">
+				u.ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="id == null and uuid != null">
+				u.uuid = #{uuid,jdbcType=VARCHAR}
+			</if>
+			<if test="id == null and uuid == null">
+				u.id = null
+			</if>
+	</update>
+	<!-- 自定义逻辑条件 -->
+	<update id="logicWhereDelete" parameterType="java.util.Map" statementType="STATEMENT">
+		update HOR_INFO_VALIDATION set DISABLED = 1
+		where
+			${whereSqlStr}
+	</update>
+	<!-- 物理删除 -->
+	<delete id="physicalDelete" parameterType="java.lang.Integer">
+		delete from HOR_INFO_VALIDATION where id=#{id,jdbcType=INTEGER}
+	</delete>
+	
+	<!-- 自定义物理条件 -->
+	<delete id="physicalWhereDelete" parameterType="java.util.Map" statementType="STATEMENT">
+		DELETE FROM HOR_INFO_VALIDATION WHERE ${whereSqlStr}
+	</delete>
+	
+	
+</mapper>
